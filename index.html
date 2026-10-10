@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Grimoire Gourmand</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-icon">✦</span> Mon Grimoire Gourmand</a>
+    <nav><a href="#recettes">Les recettes</a><a href="#courses">Ma liste de courses</a><a href="#ajouter">Ajouter une recette</a></nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">LE CARNET DE CUISINE À PARTAGER</p>
+      <h1>Qu'est-ce qu'on<br><em>mange aujourd'hui ?</em></h1>
+      <p class="hero-copy">Toutes vos recettes préférées au même endroit, avec la liste de courses prête en un clic.</p>
+      <form id="search-form" class="searchbar">
+        <span aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="Ex. : gratin de pâtes, cookies..." aria-label="Rechercher une recette">
+        <button type="submit">Rechercher</button>
+      </form>
+      <div class="quick-tags"><span>À essayer :</span><button class="tag" data-search="gratin">Gratin de pâtes</button><button class="tag" data-search="cookies">Cookies</button><button class="tag" data-search="curry">Curry de pois chiches</button></div>
+    </section>
+
+    <section id="recettes" class="recipes-section">
+      <div class="section-heading">
+        <div><p class="eyebrow">LE CARNET COMMUN</p><h2>Les recettes <span id="recipe-count">0</span></h2></div>
+        <select id="category-filter" aria-label="Filtrer par catégorie">
+          <option value="Toutes">Toutes les catégories</option><option>Plat</option><option>Dessert</option><option>Végétarien</option>
+        </select>
+      </div>
+      <div id="recipe-grid" class="recipe-grid"></div>
+      <p id="empty-state" class="empty-state" hidden>Aucune recette trouvée. Essaie un autre mot ou ajoute une recette !</p>
+    </section>
+
+    <section id="courses" class="shopping-section">
+      <div class="section-heading">
+        <div><p class="eyebrow">ON N’ACHÈTE QUE LE NÉCESSAIRE</p><h2>Ma liste de courses <span id="shopping-count">0</span></h2></div>
+        <div class="shopping-actions">
+          <button id="clear-shopping" class="secondary-btn" type="button">Vider la liste</button>
+          <button id="copy-shopping-all" class="primary-btn" type="button">Copier les courses à acheter</button>
+        </div>
+      </div>
+      <p class="section-copy">Ajoute les ingrédients d’une ou plusieurs recettes. Coche « Déjà à la maison » pour ne pas les acheter. Ta liste reste enregistrée dans ce navigateur.</p>
+      <div class="shopping-add-row">
+        <select id="shopping-recipe-select" aria-label="Choisir une recette"></select>
+        <button id="add-recipe-to-shopping" class="primary-btn" type="button">＋ Ajouter les ingrédients</button>
+      </div>
+      <div id="shopping-empty" class="shopping-empty">Ta liste est vide pour le moment. Ouvre une recette et ajoute ses ingrédients ici.</div>
+      <div id="shopping-list-items" class="shopping-list-items"></div>
+      <div class="shopping-summary"><span id="shopping-to-buy">0 ingrédient à acheter</span><span id="shopping-at-home">0 déjà à la maison</span></div>
+    </section>
+
+    <section id="ajouter" class="add-section">
+      <div class="add-intro"><p class="eyebrow">UNE BONNE IDÉE À PARTAGER ?</p><h2>Ajoute ta recette<br><em>au grimoire.</em></h2><p>Cette version de démonstration garde les recettes ajoutées dans ce navigateur. Pour un carnet commun à tous tes amis, on connectera ensuite une base de données en ligne.</p></div>
+      <form id="add-form" class="add-form">
+        <label>Nom de la recette<input name="title" required placeholder="Ex. : lasagnes de mamie"></label>
+        <div class="form-row"><label>Catégorie<select name="category"><option>Plat</option><option>Dessert</option><option>Végétarien</option></select></label><label>Temps (minutes)<input name="time" type="number" min="1" value="30" required></label></div>
+        <label>Ingrédients <span class="hint">(un par ligne, quantité comprise)</span><textarea name="ingredients" required rows="4" placeholder="300 g de pâtes&#10;20 cl de crème&#10;150 g de fromage râpé"></textarea></label>
+        <label>Étapes de préparation <span class="hint">(une par ligne)</span><textarea name="steps" required rows="4" placeholder="Faire cuire les pâtes.&#10;Mélanger avec la sauce.&#10;Enfourner 20 minutes."></textarea></label>
+        <button class="primary-btn" type="submit">＋ Ajouter au grimoire</button>
+        <p id="add-feedback" class="feedback" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer><span>✦ Mon Grimoire Gourmand</span><span>Fait avec amour et un peu de parmesan.</span></footer>
+
+  <dialog id="recipe-dialog" class="recipe-dialog">
+    <button class="close-dialog" id="close-dialog" aria-label="Fermer">×</button>
+    <div id="dialog-content"></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
